@@ -27,34 +27,24 @@ public:
         delete raw_ptr_;
     }
 
-    T& operator*() const {
+    T& operator*() {
         return *raw_ptr_;
     }
-//    T& operator*() {
-//        return *raw_ptr_;
-//    }
-//    const T& operator*() const {
-//        return *raw_ptr_;
-//    }
-    T* operator->() const {
+    const T& operator*() const {
+        return *raw_ptr_;
+    }
+
+    T* operator->() {
         return raw_ptr_;
     }
-//    T* operator->() {
-//        return raw_ptr_;
-//    }
-//    const T* operator->() const {
-//        return raw_ptr_;
-//    }
+    const T* operator->() const {
+        return raw_ptr_;
+    }
 
     T* release() {
         T* raw_ptr = raw_ptr_;
         raw_ptr_ = nullptr;
         return raw_ptr;
-    }
-
-    void reset(T** ptr) {
-        delete release();
-        std::swap(raw_ptr_, *ptr);
     }
 
     T* get() {
@@ -86,13 +76,12 @@ int main() {
               << ", B = " << ptr_AB->B
               << ", sum = " << ptr_AB->sum() <<std::endl;
 
-    AB* ptr_AB_2 = new AB({3, 7});
-    std::cout << ptr_AB_2 << " " << ptr_AB.get() << std::endl;
-    ptr_AB.reset(&ptr_AB_2);
-    assert(ptr_AB_2 == nullptr);
-    std::cout << ptr_AB_2 << " " << ptr_AB.get() << std::endl;
-    std::cout << "A = " << ptr_AB->A
-              << ", B = " << ptr_AB->B
-              << ", sum = " << ptr_AB->sum() <<std::endl;
+    // copy constructor = delete
+//    UniquePtr<AB> ptr_AB_2(ptr_AB); // is not compiled
+
+    UniquePtr<AB> ptr_AB_2(new AB({4, 2}));
+//    copy assignment operator = delete
+//    ptr_AB_2 = ptr_AB; // is not compiled
+
     return 0;
 }
