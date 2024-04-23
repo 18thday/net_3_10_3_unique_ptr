@@ -82,6 +82,5 @@ int main() {
     UniquePtr<AB> ptr_AB_2(new AB({4, 2}));
 //    copy assignment operator = delete
 //    ptr_AB_2 = ptr_AB; // is not compiled
-
     return 0;
 }
