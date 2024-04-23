@@ -77,10 +77,11 @@ int main() {
               << ", sum = " << ptr_AB->sum() <<std::endl;
 
     // copy constructor = delete
-//    UniquePtr<AB> ptr_AB_2(ptr_AB); // is not compiled
+//    UniquePtr<AB> ptr_AB_copy(ptr_AB); // is not compiled
 
-    UniquePtr<AB> ptr_AB_2(new AB({4, 2}));
-//    copy assignment operator = delete
-//    ptr_AB_2 = ptr_AB; // is not compiled
+    // copy assignment operator = delete
+//    UniquePtr<AB> ptr_AB_2(new AB({4, 2}));
+//    ptr_AB = ptr_AB_2; // is not compiled
+
     return 0;
 }
